@@ -1,0 +1,7 @@
+*.fastq
+*.fasta
+*.fna
+*.sam
+*.bam
+*.gz
+unicycler_output/
