@@ -1,0 +1,1 @@
+# qcb-bacterial-genomics-workshop
