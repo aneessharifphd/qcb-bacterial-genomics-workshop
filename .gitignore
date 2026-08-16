@@ -5,3 +5,6 @@
 *.bam
 *.gz
 unicycler_output/
+references/*.bt2
+*.fna
+!references/NC_001422.fna
