@@ -1,0 +1,10 @@
++ '[' -z SRR32861756 ']'
++ ACCESSION=SRR32861756
++ trimmomatic PE -phred33 data/SRR32861756_1.fastq.gz data/SRR32861756_2.fastq.gz data/SRR32861756_1.trimmed.fastq.gz data/SRR32861756_1.unpaired.fastq.gz data/SRR32861756_2.trimmed.fastq.gz data/SRR32861756_2.unpaired.fastq.gz ILLUMINACLIP:/home/anees/miniconda3/envs/research/share/trimmomatic-0.40-0/adapters/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+TrimmomaticPE: Started with arguments:
+ -phred33 data/SRR32861756_1.fastq.gz data/SRR32861756_2.fastq.gz data/SRR32861756_1.trimmed.fastq.gz data/SRR32861756_1.unpaired.fastq.gz data/SRR32861756_2.trimmed.fastq.gz data/SRR32861756_2.unpaired.fastq.gz ILLUMINACLIP:/home/anees/miniconda3/envs/research/share/trimmomatic-0.40-0/adapters/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+ILLUMINACLIP: Using adapter file from user-specified absolute path: /home/anees/miniconda3/envs/research/share/trimmomatic-0.40-0/adapters/TruSeq3-PE.fa
+Using PrefixPair: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT' and 'GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT'
+ILLUMINACLIP: Using 1 prefix pairs, 0 forward/reverse sequences, 0 forward only sequences, 0 reverse only sequences
+Input Read Pairs: 3151519 Both Surviving: 3088296 (97.99%) Forward Only Surviving: 54361 (1.72%) Reverse Only Surviving: 6164 (0.20%) Dropped: 2698 (0.09%)
+TrimmomaticPE: Completed successfully
