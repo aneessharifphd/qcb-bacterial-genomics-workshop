@@ -1,0 +1,195 @@
+
+[93m[1m[4mStarting Unicycler[0m [2m(2026-08-17 08:44:18)[0m
+[2m    Welcome to Unicycler, an assembly pipeline for bacterial genomes. Since you[0m
+[2mprovided only short reads, Unicycler will essentially function as a SPAdes-[0m
+[2moptimiser. It will try many k-mer sizes, choose the best based on contig length[0m
+[2mand graph connectivity, and scaffold the graph using SPAdes repeat resolution.[0m
+[2m    For more information, please see https://github.com/rrwick/Unicycler[0m
+
+Command: [1m/home/anees/miniconda3/envs/unicycler/bin/unicycler -1 data/SRR32861756_1.clean.fastq.gz -2 data/SRR32861756_2.clean.fastq.gz -s data/SRR32861756_unpaired_combined.fastq.gz -o results/SRR32861756/unicycler.output -t 10 --spades_options "-m 6144"[0m
+
+Unicycler version: v0.5.1
+Using 10 threads
+
+Making output directory:
+  /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output
+
+Dependencies:
+  [4mProgram       Version   Status  [0m
+  spades.py     4.0.0     [32mgood[0m    
+  [2mracon                   not used[0m
+  makeblastdb   2.16.0+   [32mgood[0m    
+  tblastn       2.16.0+   [32mgood[0m    
+
+
+[93m[1m[4mChoosing k-mer range for assembly[0m [2m(2026-08-17 08:44:43)[0m
+[2m    Unicycler chooses a k-mer range for SPAdes based on the length of the input[0m
+[2mreads. It uses a wide range of many k-mer sizes to maximise the chance of[0m
+[2mfinding an ideal assembly.[0m
+
+SPAdes maximum k-mer: 127
+Median read length: 151
+K-mer range: 27, 53, 71, 87, 99, 111, 119, 127
+
+
+[93m[1m[4mSPAdes assemblies[0m [2m(2026-08-17 08:45:08)[0m
+[2m    Unicycler now uses SPAdes to assemble the short reads. It scores the[0m
+[2massembly graph for each k-mer using the number of contigs (fewer is better) and[0m
+[2mthe number of dead ends (fewer is better). The score function is 1/(c*(d+2)),[0m
+[2mwhere c is the contig count and d is the dead end count.[0m
+
+spades.py -o /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/spades_assembly -k 27 --threads 10 --gfa11 --isolate -1 /home/anees/qcb-bacterial-genomics-workshop/data/SRR32861756_1.clean.fastq.gz -2 /home/anees/qcb-bacterial-genomics-workshop/data/SRR32861756_2.clean.fastq.gz -s /home/anees/qcb-bacterial-genomics-workshop/data/SRR32861756_unpaired_combined.fastq.gz -m 6144
+
+spades.py -o /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/spades_assembly -k 27,53 --threads 10 --gfa11 --restart-from k27 -m 6144
+
+spades.py -o /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/spades_assembly -k 27,53,71 --threads 10 --gfa11 --restart-from k53 -m 6144
+
+spades.py -o /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/spades_assembly -k 27,53,71,87 --threads 10 --gfa11 --restart-from k71 -m 6144
+
+spades.py -o /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/spades_assembly -k 27,53,71,87,99 --threads 10 --gfa11 --restart-from k87 -m 6144
+
+spades.py -o /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/spades_assembly -k 27,53,71,87,99,111 --threads 10 --gfa11 --restart-from k99 -m 6144
+
+spades.py -o /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/spades_assembly -k 27,53,71,87,99,111,119 --threads 10 --gfa11 --restart-from k111 -m 6144
+
+spades.py -o /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/spades_assembly -k 27,53,71,87,99,111,119,127 --threads 10 --gfa11 --restart-from k119 -m 6144
+
+[4mK-mer   Contigs   Dead ends   Score      [0m
+   27                         too complex
+   53     1,359           0      3.68e-04
+   71       904           0      5.53e-04
+   87       585           0      8.55e-04
+   99       460           0      1.09e-03
+  111       363           0      1.38e-03
+  119       330           0      1.52e-03
+[32m  127       311           0      1.61e-03 <-best[0m
+
+Read depth filter: removed 12 contigs totalling 3496 bp
+Deleting /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/spades_assembly/
+
+
+[93m[1m[4mDetermining graph multiplicity[0m [2m(2026-08-17 10:19:09)[0m
+[2m    Multiplicity is the number of times a sequence occurs in the underlying[0m
+[2msequence. Single-copy contigs (those with a multiplicity of one, occurring only[0m
+[2monce in the underlying sequence) are particularly useful.[0m
+
+Saving /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/002_depth_filter.gfa
+
+
+[93m[1m[4mCleaning graph[0m [2m(2026-08-17 10:19:09)[0m
+[2m    Unicycler now performs various cleaning procedures on the graph to remove[0m
+[2moverlaps and simplify the graph structure. The end result is a graph ready for[0m
+[2mbridging.[0m
+
+Graph overlaps removed
+
+Removed zero-length segments:
+    172, 174, 175, 176, 177, 180, 182, 183, 184, 186, 187, 189, 191, 200, 208,
+209, 212, 219, 224, 230, 240, 241, 242, 245, 248, 254, 260, 264, 266, 270, 274,
+277, 279, 283, 294, 296, 309
+
+Removed zero-length segments:
+    179, 268, 292, 308
+
+Merged small segments:
+    280, 281, 284, 286, 288, 290, 293, 298, 299, 303, 304
+
+Saving /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/003_overlaps_removed.gfa
+
+[2m    Unicycler now selects a set of anchor contigs from the single-copy contigs.[0m
+[2mThese are the contigs which will be connected via bridges to form the final[0m
+[2massembly.[0m
+
+43 anchor segments (3,858,574 bp) out of 259 total segments (3,897,670 bp)
+
+
+[93m[1m[4mCreating SPAdes contig bridges[0m [2m(2026-08-17 10:19:09)[0m
+[2m    SPAdes uses paired-end information to perform repeat resolution (RR) and[0m
+[2mproduce contigs from the assembly graph. SPAdes saves the graph paths[0m
+[2mcorresponding to these contigs in the contigs.paths file. When one of these[0m
+[2mpaths contains two or more anchor contigs, Unicycler can create a bridge from[0m
+[2mthe path.[0m
+
+                                                                                               Bridge[0m
+[4mStart                                       Path                                      End     quality[0m
+  -30                                       -109                                      40         60.8
+  -18                             -126 -> 137 -> 88 -> 86                             24         36.2
+  -15                         -98 -> 250 -> -77 -> 184 -> -71                         17         29.0
+  -11                   76 -> -241 -> 103 -> 207 -> 79 -> 206 -> 109                  26         27.3
+   -1                                       -95                                       35         63.2
+    2          163 -> -82 -> 84 -> -49 -> -106 -> -68 -> -96 -> -100 -> -108          -36        16.7
+    9                            -134 -> 70 -> 136 -> -163                            3          35.5
+   11   -117 -> 149 -> 111 -> -50 -> 113 -> 124 -> -120 -> 232 -> -93 -> 73 -> -114   8          17.9
+   14                                -128 -> 90 -> -87                                33         40.0
+   15                           71 -> 185 -> 77 -> 244 -> 98                          -23        29.2
+   19                                       -110                                      -33        63.1
+   20                                       110                                       21         62.2
+   21                         226 -> 122 -> -115 -> 91 -> -171                        -30        42.8
+   22                  -107 -> 186 -> 99 -> 44 -> -125 -> -233 -> -83                 -31        20.8
+   24                  114 -> -74 -> 93 -> 236 -> 120 -> -123 -> -113                 14         27.3
+   25                                -111 -> 148 -> 117                               38         59.6
+   28                        -79 -> 205 -> -103 -> -231 -> -76                        -39        24.9
+   38                                       -95                                       36         59.4
+   40          -132 -> -57 -> -87 -> -55 -> 122 -> -115 -> 91 -> -54 -> -132          28         15.3
+   42                                       128                                       39         52.3
+
+
+[93m[1m[4mCreating loop unrolling bridges[0m [2m(2026-08-17 10:19:09)[0m
+[2m    When a SPAdes contig path connects an anchor contig with the middle contig[0m
+[2mof a simple loop, Unicycler concludes that the sequences are contiguous (i.e.[0m
+[2mthe loop is not a separate piece of DNA). It then uses the read depth of the[0m
+[2mmiddle and repeat contigs to guess the number of times to traverse the loop and[0m
+[2mmakes a bridge.[0m
+
+No loop unrolling bridges made
+
+
+[93m[1m[4mApplying bridges[0m [2m(2026-08-17 10:19:09)[0m
+[2m    Unicycler now applies to the graph in decreasing order of quality. This[0m
+[2mensures that when multiple, contradictory bridges exist, the most supported[0m
+[2moption is used.[0m
+
+[4mBridge type   Start -> end   Path                                       Quality[0m
+SPAdes          -1 -> 35     -95                                         63.238
+SPAdes          19 -> -33    -110                                        63.082
+SPAdes          20 -> 21     110                                         62.201
+SPAdes         -30 -> 40     -109                                        60.832
+SPAdes          25 -> 38     -111, 148, 117                              59.640
+SPAdes          38 -> 36     -95                                         59.366
+SPAdes          42 -> 39     128                                         52.318
+SPAdes          21 -> -30    226, 122, -115, 91, -171                    42.785
+SPAdes          14 -> 33     -128, 90, -87                               40.017
+SPAdes         -18 -> 24     -126, 137, 88, 86                           36.188
+SPAdes           9 -> 3      -134, 70, 136, -163                         35.534
+SPAdes          15 -> -23    71, 185, 77, 244, 98                        29.221
+SPAdes         -15 -> 17     -98, 250, -77, 184, -71                     28.999
+SPAdes          24 -> 14     114, -74, 93, 236, 120, -123, -113          27.319
+SPAdes         -11 -> 26     76, -241, 103, 207, 79, 206, 109            27.285
+SPAdes          28 -> -39    -79, 205, -103, -231, -76                   24.926
+SPAdes          22 -> -31    -107, 186, 99, 44, -125, -233, -83          20.809
+SPAdes          11 -> 8      -117, 149, 111, -50, 113, 124, -120,        17.906
+                             232, -93, 73, -114                                
+SPAdes           2 -> -36    163, -82, 84, -49, -106, -68, -96, -100,    16.686
+                             -108                                              
+SPAdes          40 -> 28     -132, -57, -87, -55, 122, -115, 91, -54,    15.297
+                             -132                                              
+
+Saving /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/004_bridges_applied.gfa
+
+
+[93m[1m[4mBridged assembly graph[0m [2m(2026-08-17 10:19:09)[0m
+[2m    The assembly is now mostly finished and no more structural changes will be[0m
+[2mmade. Ideally the assembly graph should now have one contig per replicon and no[0m
+[2merroneous contigs (i.e. a complete assembly). If there are more contigs, then[0m
+[2mthe assembly is not complete.[0m
+
+Saving /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/005_final_clean.gfa
+
+[4mComponent   Segments   Links   Length      N50       Longest segment   Status    [0m
+        1        170     238   3,904,998   389,289           625,037  [31m incomplete[0m
+
+
+[93m[1m[4mAssembly complete[0m [2m(2026-08-17 10:19:09)[0m
+Saving /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/assembly.gfa
+Saving /home/anees/qcb-bacterial-genomics-workshop/results/SRR32861756/unicycler.output/assembly.fasta
+

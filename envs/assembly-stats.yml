@@ -1,0 +1,10 @@
+name: assembly-stats
+channels:
+  - defaults
+  - bioconda
+dependencies:
+  - _openmp_mutex=5.1=52_gnu
+  - assembly-stats=1.0.1=h9948957_10
+  - libgcc=15.2.0=h69a1729_8
+  - libstdcxx=15.2.0=h39759b7_8
+prefix: /home/anees/miniconda3/envs/assembly-stats

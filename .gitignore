@@ -8,3 +8,11 @@ unicycler_output/
 references/*.bt2
 *.fna
 !references/NC_001422.fna
+results/*/
+*.fastq
+*.fq
+*.fasta
+*.fa
+*.gfa
+*.bam
+*.bam.csi
