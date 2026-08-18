@@ -1,18 +1,25 @@
-*.fastq
-*.fasta
-*.fna
-*.sam
-*.bam
-*.gz
-unicycler_output/
-references/*.bt2
-*.fna
-!references/NC_001422.fna
-results/*/
+# Sequencing data (raw and intermediate)
 *.fastq
 *.fq
 *.fasta
 *.fa
-*.gfa
+*.fna
+*.sam
 *.bam
 *.bam.csi
+*.gz
+*.gfa
+
+# Keep the PhiX reference used for Bowtie2 removal
+!references/NC_001422.fna
+
+# Bowtie2 index files
+references/*.bt2
+
+# Pipeline outputs — ignore everything under these, at any depth
+results/
+prokka/
+unicycler_output/
+
+# Logs
+logs/*.log
