@@ -12,11 +12,11 @@ ACCESSION=$1
 prokka \
 --outdir "results/annotation/${ACCESSION}" \
 --prefix "${ACCESSION}" \
---locustag "${AACESSION}" \
+--locustag "${ACCESSION}" \
 --genus Vibrio \
---species cholerae \
+--species vulnificus \
 --strain "${ACCESSION}" \
 --cpus 10 \
 --force \
-"results/${ACCESSION}/unicycler.output/assembly.fasta" \
+"../references/OrthoANI_genomes/${ACCESSION}.fasta" \
 2>&1 | tee logs/${ACCESSION}_prokka.log
