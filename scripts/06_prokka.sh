@@ -18,5 +18,5 @@ prokka \
 --strain "${ACCESSION}" \
 --cpus 10 \
 --force \
-"../references/OrthoANI_genomes/${ACCESSION}.fasta" \
+"../results/Vcholerae_genomes/${ACCESSION}.fasta" \
 2>&1 | tee logs/${ACCESSION}_prokka.log
